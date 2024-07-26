@@ -27,9 +27,6 @@ public class ModelUsuarios implements Serializable {
     @Column(name = "email", unique = true, length = 150)
     private String email;
 
-    @Column(name = "senha", length = 100)
-    private String senha;
-
     @Column(name = "cpf", unique = true, length = 20)
     private String cpf;
 
@@ -41,10 +38,10 @@ public class ModelUsuarios implements Serializable {
     private TipoCarteira tipoCarteira;
 
     @Column(name = "quantidade_transacoes_realizadas")
-    private Integer quantidadeTransacoesRealizadas;
+    private Integer quantidadeTransacoesRealizadas = 0;
 
     @Column(name = "total_transacoes_realizadas")
-    private BigDecimal totalTransacoesRealizadas;
+    private BigDecimal totalTransacoesRealizadas = BigDecimal.ZERO;
 
     @Column(name = "data_criacao_usuario")
     @CreationTimestamp
