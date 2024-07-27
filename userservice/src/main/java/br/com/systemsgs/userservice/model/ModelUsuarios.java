@@ -50,4 +50,12 @@ public class ModelUsuarios implements Serializable {
     @Column(name = "data_ultima_alteracao")
     @CreationTimestamp
     private LocalDateTime dataAlteracao;
+
+    public void debitar(BigDecimal valor) {
+        this.valorConta = this.valorConta.subtract(valor);
+    }
+
+    public void creditar(BigDecimal valor) {
+        this.valorConta = this.valorConta.add(valor);
+    }
 }
