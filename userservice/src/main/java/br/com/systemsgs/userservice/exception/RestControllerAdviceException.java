@@ -1,5 +1,6 @@
 package br.com.systemsgs.userservice.exception;
 
+import br.com.systemsgs.userservice.exception.erros.*;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -45,5 +46,11 @@ public class RestControllerAdviceException {
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     public ApiRestErrors camposDuplicadoException(){
         return new ApiRestErrors(new CamposDuplicadosException().getMessage());
+    }
+
+    @ExceptionHandler(TipoCarteiraLojistaException.class)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public ApiRestErrors tipoCarteiraLojistasException(){
+        return new ApiRestErrors(new TipoCarteiraLojistaException().getMessage());
     }
 }
