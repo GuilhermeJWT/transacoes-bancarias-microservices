@@ -1,4 +1,4 @@
-package br.com.systemsgs.userservice.exception;
+package br.com.systemsgs.userservice.exception.erros;
 
 public class CamposDuplicadosException extends RuntimeException{
 
