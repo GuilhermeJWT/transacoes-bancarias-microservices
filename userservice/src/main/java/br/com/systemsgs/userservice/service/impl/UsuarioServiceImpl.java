@@ -1,7 +1,7 @@
 package br.com.systemsgs.userservice.service.impl;
 
 import br.com.systemsgs.userservice.dto.ModelUsuariosDTO;
-import br.com.systemsgs.userservice.exception.UsuarioNaoEncontradoException;
+import br.com.systemsgs.userservice.exception.erros.UsuarioNaoEncontradoException;
 import br.com.systemsgs.userservice.model.ModelUsuarios;
 import br.com.systemsgs.userservice.repository.UsuariosRepository;
 import br.com.systemsgs.userservice.service.UsuarioService;
