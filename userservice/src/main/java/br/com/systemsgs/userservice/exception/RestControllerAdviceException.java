@@ -1,5 +1,6 @@
 package br.com.systemsgs.userservice.exception;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,5 +27,17 @@ public class RestControllerAdviceException {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ApiRestErrors usuarioNaoEncontradoException(){
         return new ApiRestErrors(new UsuarioNaoEncontradoException().getMessage());
+    }
+
+    @ExceptionHandler(BeneficiarioNaoEncontradoException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiRestErrors beneficiarioNaoEncontradoException(){
+        return new ApiRestErrors(new BeneficiarioNaoEncontradoException().getMessage());
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public ApiRestErrors camposDuplicadoException(){
+        return new ApiRestErrors(new CamposDuplicadosException().getMessage());
     }
 }
