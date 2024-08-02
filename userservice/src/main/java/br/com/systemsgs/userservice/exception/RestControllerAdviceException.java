@@ -3,6 +3,8 @@ package br.com.systemsgs.userservice.exception;
 import br.com.systemsgs.userservice.exception.erros.*;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -52,5 +54,17 @@ public class RestControllerAdviceException {
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     public ApiRestErrors tipoCarteiraLojistasException(){
         return new ApiRestErrors(new TipoCarteiraLojistaException().getMessage());
+    }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiRestErrors metodoHttpNaoSuportadoException(){
+        return new ApiRestErrors(new MetodoHttpNaoSuportadoException().getMessage());
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiRestErrors httpMessageNotReadableException(){
+        return new ApiRestErrors(new PayloadInexistenteException().getMessage());
     }
 }
