@@ -35,6 +35,12 @@ public class RestControllerAdviceException {
         return new ApiRestErrors(new BeneficiarioNaoEncontradoException().getMessage());
     }
 
+    @ExceptionHandler(ValorTransacaoMaiorContaAtualException.class)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public ApiRestErrors valorTransacaoMaiorContaAtualException(){
+        return new ApiRestErrors(new ValorTransacaoMaiorContaAtualException().getMessage());
+    }
+
     @ExceptionHandler(DataIntegrityViolationException.class)
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     public ApiRestErrors camposDuplicadoException(){
