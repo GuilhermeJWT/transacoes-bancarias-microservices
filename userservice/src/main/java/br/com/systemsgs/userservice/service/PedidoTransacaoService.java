@@ -4,6 +4,6 @@ import br.com.systemsgs.userservice.dto.PedidoTransacaoDTO;
 
 public interface PedidoTransacaoService {
 
-    PedidoTransacaoDTO pedidoTransacao(PedidoTransacaoDTO pedidoTransacaoDTO);
+    String pedidoTransacao(PedidoTransacaoDTO pedidoTransacaoDTO);
 
 }
