@@ -1,7 +1,5 @@
 package br.com.systemsgs.transaction_service.config;
 
-import org.springframework.amqp.core.Declarable;
-import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -15,9 +13,8 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMqConfiguration {
 
     public static final String QUEUE_TRANSACTION = "queue-transaction";
-    public static final String QUEUE_TRANSACTION_NEGADA = "queue-transaction-negada";
     public static final String QUEUE_TRANSACTION_APROVADA = "queue-transaction-aprovada";
-    public static final String QUEUE_NOTIFICATION = "queue-notification";
+    public static final String QUEUE_NOTIFICATION_BENEFICIARIO = "queue-notification-beneficiario";
 
     @Bean
     public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory){

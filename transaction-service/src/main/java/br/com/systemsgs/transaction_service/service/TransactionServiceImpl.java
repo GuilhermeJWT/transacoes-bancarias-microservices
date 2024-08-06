@@ -1,5 +1,6 @@
 package br.com.systemsgs.transaction_service.service;
 
+import br.com.systemsgs.transaction_service.dto.PayloadResponseTransactionAprovada;
 import br.com.systemsgs.transaction_service.dto.PayloadTransacaoRequestRabbitMq;
 import br.com.systemsgs.transaction_service.enums.StatusPedidoTransacao;
 import br.com.systemsgs.transaction_service.enums.TipoCarteira;
@@ -14,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
+
+import static br.com.systemsgs.transaction_service.config.RabbitMqConfiguration.QUEUE_TRANSACTION_APROVADA;
 
 @Service
 public class TransactionServiceImpl {
@@ -30,7 +33,12 @@ public class TransactionServiceImpl {
     @Transactional
     public void processaValidacaoPedidoTransacao(PayloadTransacaoRequestRabbitMq payloadMessage){
         if(!payloadMessage.getTipoCarteira().equals(TipoCarteira.USUARIO_COMUM)) {
+
             var transacaoSalva =  salvaTransacaoAprovada(payloadMessage);
+            var dadosTransacaoAprovada = converteDadosTransacaoAprovada(transacaoSalva);
+
+            rabbitTemplate.convertAndSend(QUEUE_TRANSACTION_APROVADA, dadosTransacaoAprovada);
+
         }else {
             throw new TransacaoNegadaException();
         }
@@ -58,5 +66,16 @@ public class TransactionServiceImpl {
         DateTimeFormatter formataDataHora = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
         return formataDataHora.format(dataHora);
+    }
+
+    private PayloadResponseTransactionAprovada converteDadosTransacaoAprovada(ModelTransaction modelTransaction){
+        PayloadResponseTransactionAprovada payloadTransactionAprovada = new PayloadResponseTransactionAprovada();
+
+        payloadTransactionAprovada.setIdPagador(modelTransaction.getIdPagador());
+        payloadTransactionAprovada.setIdBeneficiario(modelTransaction.getIdBeneficiario());
+        payloadTransactionAprovada.setValorTransferencia(modelTransaction.getValorTransferencia());
+        payloadTransactionAprovada.setStatusTransacao(modelTransaction.getStatusTransacao());
+
+        return payloadTransactionAprovada;
     }
 }
