@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMqConfiguration {
 
     public static final String QUEUE_TRANSACATION = "queue-transaction";
+    public static final String QUEUE_TRANSACTION_APROVADA = "queue-transaction-aprovada";
 
     @Bean
     public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory){
