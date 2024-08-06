@@ -1,6 +1,8 @@
 package br.com.systemsgs.transaction_service.listener;
 
 import br.com.systemsgs.transaction_service.dto.PayloadTransacaoRequestRabbitMq;
+import br.com.systemsgs.transaction_service.exception.erros.ErroConverterMessageException;
+import br.com.systemsgs.transaction_service.service.TransactionServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
@@ -12,14 +14,19 @@ import static br.com.systemsgs.transaction_service.config.RabbitMqConfiguration.
 @Component
 public class TransactionListener {
 
+    private final TransactionServiceImpl transactionService;
+
+    public TransactionListener(TransactionServiceImpl transactionService) {
+        this.transactionService = transactionService;
+    }
+
     @RabbitListener(queues = QUEUE_TRANSACTION)
     public void dadosPedidoTransactionListener(Message<PayloadTransacaoRequestRabbitMq> payloadMessage){
         try{
-            log.info("Mensagem consumida {}" ,payloadMessage);
-            System.out.println(payloadMessage.toString());
-
+            transactionService.processaValidacaoPedidoTransacao(payloadMessage.getPayload());
         }catch (Exception e){
             log.error("Erro ao tentar receber a mensagem {}", e);
+            throw new ErroConverterMessageException();
         }
     }
 }
