@@ -1,4 +1,4 @@
-package br.com.systemsgs.userservice.dto;
+package br.com.systemsgs.userservice.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Max;

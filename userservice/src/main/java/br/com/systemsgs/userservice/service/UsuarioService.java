@@ -1,6 +1,6 @@
 package br.com.systemsgs.userservice.service;
 
-import br.com.systemsgs.userservice.dto.ModelUsuariosDTO;
+import br.com.systemsgs.userservice.dto.request.ModelUsuariosDTO;
 import br.com.systemsgs.userservice.model.ModelUsuarios;
 
 import java.util.List;

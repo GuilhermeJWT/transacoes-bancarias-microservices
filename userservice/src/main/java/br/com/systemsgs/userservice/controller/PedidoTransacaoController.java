@@ -1,9 +1,8 @@
 package br.com.systemsgs.userservice.controller;
 
-import br.com.systemsgs.userservice.dto.PedidoTransacaoDTO;
+import br.com.systemsgs.userservice.dto.request.PedidoTransacaoDTO;
 import br.com.systemsgs.userservice.service.PedidoTransacaoService;
 import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

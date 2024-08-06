@@ -1,4 +1,4 @@
-package br.com.systemsgs.userservice.dto;
+package br.com.systemsgs.userservice.dto.payloads;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;

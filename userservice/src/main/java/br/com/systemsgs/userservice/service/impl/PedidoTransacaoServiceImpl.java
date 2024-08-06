@@ -1,7 +1,7 @@
 package br.com.systemsgs.userservice.service.impl;
 
-import br.com.systemsgs.userservice.dto.PayloadTransacaoRequestRabbitMq;
-import br.com.systemsgs.userservice.dto.PedidoTransacaoDTO;
+import br.com.systemsgs.userservice.dto.payloads.PayloadTransacaoRequestRabbitMq;
+import br.com.systemsgs.userservice.dto.request.PedidoTransacaoDTO;
 import br.com.systemsgs.userservice.exception.erros.BeneficiarioNaoEncontradoException;
 import br.com.systemsgs.userservice.exception.erros.UsuarioNaoEncontradoException;
 import br.com.systemsgs.userservice.exception.erros.ValorTransacaoMaiorContaAtualException;
@@ -48,7 +48,7 @@ public class PedidoTransacaoServiceImpl implements PedidoTransacaoService {
             log.error("Erro ao tentar realizar a Transação {}", e.getMessage());
             return "Erro ao tentar realizar a Transação, tente novamente mais tarde.";
         }
-        return "A Transação está sendo processada.";
+        return "A Transação está sendo processada....";
     }
 
     private PayloadTransacaoRequestRabbitMq dadosPedidoTransacao(ModelUsuarios pagador, ModelUsuarios beneficiario, PedidoTransacaoDTO pedidoTransacaoDTO){

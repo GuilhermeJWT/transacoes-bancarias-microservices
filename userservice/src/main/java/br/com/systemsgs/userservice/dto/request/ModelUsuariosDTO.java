@@ -1,4 +1,4 @@
-package br.com.systemsgs.userservice.dto;
+package br.com.systemsgs.userservice.dto.request;
 
 import br.com.systemsgs.userservice.enums.TipoCarteira;
 import com.fasterxml.jackson.annotation.JsonProperty;

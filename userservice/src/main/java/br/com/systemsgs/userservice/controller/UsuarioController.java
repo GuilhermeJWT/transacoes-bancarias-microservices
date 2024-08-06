@@ -1,7 +1,7 @@
 package br.com.systemsgs.userservice.controller;
 
-import br.com.systemsgs.userservice.dto.ModelUsuariosDTO;
-import br.com.systemsgs.userservice.dto.UsuarioResponse;
+import br.com.systemsgs.userservice.dto.request.ModelUsuariosDTO;
+import br.com.systemsgs.userservice.dto.response.UsuarioResponse;
 import br.com.systemsgs.userservice.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
