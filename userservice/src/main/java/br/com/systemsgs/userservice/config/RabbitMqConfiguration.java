@@ -1,30 +1,18 @@
 package br.com.systemsgs.userservice.config;
 
-import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.modelmapper.ModelMapper;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ApplicationConfiguration {
+public class RabbitMqConfiguration {
 
     public static final String QUEUE_TRANSACATION = "queue-transaction";
-
-    @Bean
-    public ModelMapper mapper(){
-        return new ModelMapper();
-    }
-
-    @Bean
-    public Queue queue(){
-        return new Queue(QUEUE_TRANSACATION);
-    }
 
     @Bean
     public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory){

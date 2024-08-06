@@ -14,7 +14,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static br.com.systemsgs.userservice.config.ApplicationConfiguration.QUEUE_TRANSACATION;
+import static br.com.systemsgs.userservice.config.RabbitMqConfiguration.QUEUE_TRANSACATION;
 
 @Slf4j
 @Service
