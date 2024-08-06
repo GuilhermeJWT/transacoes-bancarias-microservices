@@ -1,13 +1,8 @@
 package br.com.systemsgs.transaction_service.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
@@ -15,42 +10,45 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection = "tb_transacoes")
-public class ModelTransacao implements Serializable {
+public class ModelTransaction implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @MongoId
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id_transacao")
+    @Field(name = "id_transacao")
     private UUID idTransacao;
 
-    @Column(name = "id_pagador")
+    @Indexed(name = "id_pagador_index")
+    @Field(name = "id_pagador")
     private Long idPagador;
 
-    @Column(name = "nome_pagador")
+    @Field(name = "nome_pagador")
     private String nomePagador;
 
-    @Column(name = "id_beneficiario")
+    @Indexed(name = "id_beneficiario_index")
+    @Field(name = "id_beneficiario")
     private Long idBeneficiario;
 
-    @Column(name = "nome_beneficiario")
+    @Field(name = "nome_beneficiario")
     private String nomeBeneficiario;
 
-    @Column(name = "email_beneficiario")
+    @Field(name = "email_beneficiario")
     private String emailBeneficiario;
 
-    @Field(targetType = FieldType.DECIMAL128)
-    @Column(name = "valor_transferencia")
+    @Field(name = "valor_transferencia",targetType = FieldType.DECIMAL128)
     private BigDecimal valorTransferencia;
 
-    @Column(name = "tipo_carteira")
+    @Field(name = "tipo_carteira")
     private String tipoCarteira;
 
+    @CreatedDate
+    @Field(name = "data_transacao")
+    private LocalDateTime dataTransacao = LocalDateTime.now();
 }
