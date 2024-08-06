@@ -1,7 +1,9 @@
 package br.com.systemsgs.userservice.service.impl;
 
+import br.com.systemsgs.userservice.dto.payloads.PayloadResponseTransactionAprovada;
 import br.com.systemsgs.userservice.dto.payloads.PayloadTransacaoRequestRabbitMq;
 import br.com.systemsgs.userservice.dto.request.PedidoTransacaoDTO;
+import br.com.systemsgs.userservice.enums.StatusTransacao;
 import br.com.systemsgs.userservice.exception.erros.BeneficiarioNaoEncontradoException;
 import br.com.systemsgs.userservice.exception.erros.UsuarioNaoEncontradoException;
 import br.com.systemsgs.userservice.exception.erros.ValorTransacaoMaiorContaAtualException;
@@ -49,6 +51,23 @@ public class PedidoTransacaoServiceImpl implements PedidoTransacaoService {
             return "Erro ao tentar realizar a Transação, tente novamente mais tarde.";
         }
         return "A Transação está sendo processada....";
+    }
+
+    @Override
+    public void dadosPedidoTransacaoAprovada(PayloadResponseTransactionAprovada payloadTransactionAprovada) {
+        if(!payloadTransactionAprovada.getStatusTransacao().equals(StatusTransacao.AUTORIZADA)){
+            var pagador = usuariosRepository.findById(payloadTransactionAprovada.getIdPagador())
+                    .orElseThrow(() -> new UsuarioNaoEncontradoException());
+
+            var beneficiario = usuariosRepository.findById(payloadTransactionAprovada.getIdBeneficiario())
+                    .orElseThrow(() -> new BeneficiarioNaoEncontradoException());
+
+            pagador.debitar(payloadTransactionAprovada.getValorTransferencia());
+            beneficiario.creditar(payloadTransactionAprovada.getValorTransferencia());
+
+            usuariosRepository.save(pagador);
+            usuariosRepository.save(beneficiario);
+        }
     }
 
     private PayloadTransacaoRequestRabbitMq dadosPedidoTransacao(ModelUsuarios pagador, ModelUsuarios beneficiario, PedidoTransacaoDTO pedidoTransacaoDTO){
