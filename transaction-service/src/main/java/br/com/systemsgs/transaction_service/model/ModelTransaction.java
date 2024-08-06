@@ -1,16 +1,16 @@
 package br.com.systemsgs.transaction_service.model;
 
-import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
+import br.com.systemsgs.transaction_service.enums.StatusPedidoTransacao;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
+import lombok.*;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -45,10 +45,12 @@ public class ModelTransaction implements Serializable {
     @Field(name = "valor_transferencia",targetType = FieldType.DECIMAL128)
     private BigDecimal valorTransferencia;
 
-    @Field(name = "tipo_carteira")
+    @Field(name = "tipo_carteira", targetType = FieldType.STRING)
     private String tipoCarteira;
 
-    @CreatedDate
-    @Field(name = "data_transacao")
-    private LocalDateTime dataTransacao = LocalDateTime.now();
+    @Field(name = "status_transacao", targetType = FieldType.STRING)
+    private StatusPedidoTransacao statusTransacao;
+
+    @Field(name = "data_hora_transacao")
+    private String dataHoraTransacao;
 }

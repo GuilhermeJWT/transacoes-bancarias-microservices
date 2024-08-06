@@ -20,11 +20,6 @@ public class RabbitMqConfiguration {
     public static final String QUEUE_NOTIFICATION = "queue-notification";
 
     @Bean
-    public Declarable orderQueue(){
-        return new Queue(QUEUE_TRANSACTION);
-    }
-
-    @Bean
     public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory){
         return new RabbitAdmin(connectionFactory);
     }

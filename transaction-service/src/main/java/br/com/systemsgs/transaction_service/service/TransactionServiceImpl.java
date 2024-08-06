@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 @Service
@@ -28,9 +30,7 @@ public class TransactionServiceImpl {
     @Transactional
     public void processaValidacaoPedidoTransacao(PayloadTransacaoRequestRabbitMq payloadMessage){
         if(!payloadMessage.getTipoCarteira().equals(TipoCarteira.USUARIO_COMUM)) {
-
             var transacaoSalva =  salvaTransacaoAprovada(payloadMessage);
-
         }else {
             throw new TransacaoNegadaException();
         }
@@ -46,9 +46,17 @@ public class TransactionServiceImpl {
         modelTransaction.setNomeBeneficiario(payloadMessage.getNomeBeneficiario());
         modelTransaction.setEmailBeneficiario(payloadMessage.getEmailBeneficiario());
         modelTransaction.setValorTransferencia(payloadMessage.getValorTransferencia());
-        modelTransaction.setTipoCarteira(StatusPedidoTransacao.AUTORIZADA.name());
+        modelTransaction.setDataHoraTransacao(formataDataHoraTransacao());
+        modelTransaction.setTipoCarteira(payloadMessage.getTipoCarteira());
+        modelTransaction.setStatusTransacao(StatusPedidoTransacao.AUTORIZADA);
 
         return transactionRepository.save(modelTransaction);
     }
 
+    private String formataDataHoraTransacao(){
+        LocalDateTime dataHora = LocalDateTime.now();
+        DateTimeFormatter formataDataHora = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+        return formataDataHora.format(dataHora);
+    }
 }
