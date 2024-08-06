@@ -50,12 +50,6 @@ public class RestControllerAdviceException {
         return new ApiRestErrors(new CamposDuplicadosException().getMessage());
     }
 
-    @ExceptionHandler(TipoCarteiraLojistaException.class)
-    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    public ApiRestErrors tipoCarteiraLojistasException(){
-        return new ApiRestErrors(new TipoCarteiraLojistaException().getMessage());
-    }
-
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiRestErrors metodoHttpNaoSuportadoException(){
