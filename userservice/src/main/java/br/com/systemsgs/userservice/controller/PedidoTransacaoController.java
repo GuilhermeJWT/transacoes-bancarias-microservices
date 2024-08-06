@@ -20,9 +20,7 @@ public class PedidoTransacaoController {
     }
 
     @PostMapping("/solicitar")
-    public ResponseEntity<PedidoTransacaoDTO> pedidoTransacao(@RequestBody @Valid PedidoTransacaoDTO pedidoTransacaoDTO){
-        var pedidoTransacao = pedidoTransacaoService.pedidoTransacao(pedidoTransacaoDTO);
-
-        return ResponseEntity.ok(pedidoTransacao);
+    public String pedidoTransacao(@RequestBody @Valid PedidoTransacaoDTO pedidoTransacaoDTO){
+        return pedidoTransacaoService.pedidoTransacao(pedidoTransacaoDTO);
     }
 }

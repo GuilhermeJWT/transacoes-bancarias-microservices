@@ -10,37 +10,45 @@ import br.com.systemsgs.userservice.repository.UsuariosRepository;
 import br.com.systemsgs.userservice.service.PedidoTransacaoService;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import static br.com.systemsgs.userservice.config.ApplicationConfiguration.QUEUE_TRANSACATION;
 
 @Slf4j
 @Service
 public class PedidoTransacaoServiceImpl implements PedidoTransacaoService {
 
     private final UsuariosRepository usuariosRepository;
-    private final AmqpTemplate sendMessageRabbitMq;
+    private final RabbitTemplate rabbitTemplate;
 
     @Autowired
-    public PedidoTransacaoServiceImpl(UsuariosRepository usuariosRepository, AmqpTemplate sendMessageRabbitMq) {
+    public PedidoTransacaoServiceImpl(UsuariosRepository usuariosRepository, RabbitTemplate rabbitTemplate) {
         this.usuariosRepository = usuariosRepository;
-        this.sendMessageRabbitMq = sendMessageRabbitMq;
+        this.rabbitTemplate = rabbitTemplate;
     }
 
     @Transactional
     @Override
-    public PedidoTransacaoDTO pedidoTransacao(PedidoTransacaoDTO pedidoTransacaoDTO) {
+    public String pedidoTransacao(PedidoTransacaoDTO pedidoTransacaoDTO) {
+        try {
+         var pagador = usuariosRepository.findById(pedidoTransacaoDTO.getIdPagador())
+              .orElseThrow(() -> new UsuarioNaoEncontradoException());
 
-        var pagador = usuariosRepository.findById(pedidoTransacaoDTO.getIdPagador())
-                .orElseThrow(() -> new UsuarioNaoEncontradoException());
+         var beneficiario = usuariosRepository.findById(pedidoTransacaoDTO.getIdBeneficiario())
+                 .orElseThrow(() -> new BeneficiarioNaoEncontradoException());
 
-        var beneficiario = usuariosRepository.findById(pedidoTransacaoDTO.getIdBeneficiario())
-                .orElseThrow(() -> new BeneficiarioNaoEncontradoException());
+         validaSaldoAtualPagador(pedidoTransacaoDTO, pagador);
+         var dadosTransacao = dadosPedidoTransacao(pagador, beneficiario, pedidoTransacaoDTO);
 
-        validaSaldoAtualPagador(pedidoTransacaoDTO, pagador);
-        dadosPedidoTransacao(pagador, beneficiario, pedidoTransacaoDTO);
+         rabbitTemplate.convertAndSend(QUEUE_TRANSACATION, dadosTransacao);
 
-        return pedidoTransacaoDTO;
+        }catch (Exception e){
+            log.error("Erro ao tentar realizar a Transação {}", e.getMessage());
+            return "Erro ao tentar realizar a Transação, tente novamente mais tarde.";
+        }
+        return "A Transação está sendo processada.";
     }
 
     private PayloadTransacaoRequestRabbitMq dadosPedidoTransacao(ModelUsuarios pagador, ModelUsuarios beneficiario, PedidoTransacaoDTO pedidoTransacaoDTO){

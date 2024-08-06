@@ -23,7 +23,7 @@ public class ApplicationConfiguration {
 
     @Bean
     public Queue queue(){
-        return new Queue("queue-transaction");
+        return new Queue(QUEUE_TRANSACATION);
     }
 
     @Bean
@@ -48,5 +48,4 @@ public class ApplicationConfiguration {
 
         return rabbitTemplate;
     }
-
 }

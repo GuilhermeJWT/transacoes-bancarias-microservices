@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class PayloadTransacaoRequestRabbitMq {
 
     @JsonProperty("id_pagador")
