@@ -3,6 +3,7 @@ package br.com.systemsgs.transaction_service.exception;
 import br.com.systemsgs.transaction_service.exception.erros.ErroConverterMessageException;
 import br.com.systemsgs.transaction_service.exception.erros.ErroInternoException;
 import br.com.systemsgs.transaction_service.exception.erros.ErroProcessarDadosException;
+import br.com.systemsgs.transaction_service.exception.erros.TransacaoNegadaException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.amqp.support.converter.MessageConversionException;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,12 @@ public class ControllerAdviceException {
         return new ApiRestErrors(new ErroProcessarDadosException().getMessage());
     }
 
+    @ExceptionHandler(TransacaoNegadaException.class)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public ApiRestErrors transacaoNegadaException(){
+        return new ApiRestErrors(new TransacaoNegadaException().getMessage());
+    }
+
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiRestErrors internalServerErroException(){
@@ -26,7 +33,7 @@ public class ControllerAdviceException {
     }
 
     @ExceptionHandler(MessageConversionException.class)
-    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiRestErrors erroConverterMensagemRabbitMqException(){
         return new ApiRestErrors(new ErroConverterMessageException().getMessage());
     }
