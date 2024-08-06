@@ -34,7 +34,6 @@ public class PedidoTransacaoServiceImpl implements PedidoTransacaoService {
     @Transactional
     @Override
     public String pedidoTransacao(PedidoTransacaoDTO pedidoTransacaoDTO) {
-        try {
          var pagador = usuariosRepository.findById(pedidoTransacaoDTO.getIdPagador())
               .orElseThrow(() -> new UsuarioNaoEncontradoException());
 
@@ -46,10 +45,6 @@ public class PedidoTransacaoServiceImpl implements PedidoTransacaoService {
 
          rabbitTemplate.convertAndSend(QUEUE_TRANSACATION, dadosTransacao);
 
-        }catch (Exception e){
-            log.error("Erro ao tentar realizar a Transação {}", e.getMessage());
-            return "Erro ao tentar realizar a Transação, tente novamente mais tarde.";
-        }
         return "A Transação está sendo processada....";
     }
 
@@ -63,6 +58,9 @@ public class PedidoTransacaoServiceImpl implements PedidoTransacaoService {
                     .orElseThrow(() -> new BeneficiarioNaoEncontradoException());
 
             pagador.debitar(payloadTransactionAprovada.getValorTransferencia());
+            pagador.multiplicaTotalTransacoesRealizadas(payloadTransactionAprovada.getValorTransferencia());
+            pagador.acrescentaTransacoesRealizadas();
+
             beneficiario.creditar(payloadTransactionAprovada.getValorTransferencia());
 
             usuariosRepository.save(pagador);

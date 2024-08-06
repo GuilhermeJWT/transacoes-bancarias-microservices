@@ -58,4 +58,12 @@ public class ModelUsuarios implements Serializable {
     public void creditar(BigDecimal valor) {
         this.valorConta = this.valorConta.add(valor);
     }
+
+    public void acrescentaTransacoesRealizadas(){
+        this.quantidadeTransacoesRealizadas = this.quantidadeTransacoesRealizadas + 1;
+    }
+
+    public void multiplicaTotalTransacoesRealizadas(BigDecimal valorTransferencia){
+        this.totalTransacoesRealizadas = this.totalTransacoesRealizadas.multiply(valorTransferencia);
+    }
 }
