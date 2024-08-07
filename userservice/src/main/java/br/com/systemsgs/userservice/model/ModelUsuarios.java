@@ -40,9 +40,6 @@ public class ModelUsuarios implements Serializable {
     @Column(name = "quantidade_transacoes_realizadas")
     private Integer quantidadeTransacoesRealizadas = 0;
 
-    @Column(name = "total_transacoes_realizadas")
-    private BigDecimal totalTransacoesRealizadas = BigDecimal.ZERO;
-
     @Column(name = "data_criacao_usuario")
     @CreationTimestamp
     private LocalDateTime dataCriacao;
@@ -61,9 +58,5 @@ public class ModelUsuarios implements Serializable {
 
     public void acrescentaTransacoesRealizadas(){
         this.quantidadeTransacoesRealizadas = this.quantidadeTransacoesRealizadas + 1;
-    }
-
-    public void multiplicaTotalTransacoesRealizadas(BigDecimal valorTransferencia){
-        this.totalTransacoesRealizadas = this.totalTransacoesRealizadas.multiply(valorTransferencia);
     }
 }

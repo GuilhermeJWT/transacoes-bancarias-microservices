@@ -58,7 +58,6 @@ public class PedidoTransacaoServiceImpl implements PedidoTransacaoService {
                     .orElseThrow(() -> new BeneficiarioNaoEncontradoException());
 
             pagador.debitar(payloadTransactionAprovada.getValorTransferencia());
-            pagador.multiplicaTotalTransacoesRealizadas(payloadTransactionAprovada.getValorTransferencia());
             pagador.acrescentaTransacoesRealizadas();
 
             beneficiario.creditar(payloadTransactionAprovada.getValorTransferencia());
