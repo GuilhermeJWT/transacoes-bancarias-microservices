@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Comprovante de Transação</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/email-style.css">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Comprovante de Transação</h1>
+    </div>
+    <div class="details">
+        <p><strong>ID da Transação:</strong> <span th:text="${idTransacao}"></span></p>
+        <p><strong>Nome do Pagador:</strong> <span th:text="${nomePagador}"></span></p>
+        <p><strong>Nome do Beneficiário:</strong> <span th:text="${nomeBeneficiario}"></span></p>
+        <p><strong>Valor da Transferência:</strong> <span th:text="${valorTransferencia}"></span></p>
+        <p><strong>Data e Hora da Transação:</strong> <span th:text="${dataHoraTransacao}"></span></p>
+    </div>
+    <div class="footer">
+        <p>Este é um email automático, por favor, não responda.</p>
+        <p>Para mais informações, entre em contato com nosso suporte.</p>
+    </div>
+</div>
+</body>
+</html>
