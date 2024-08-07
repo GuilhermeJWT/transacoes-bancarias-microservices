@@ -1,8 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Comprovante de Transação</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/email-style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .details {
+            margin-bottom: 20px;
+        }
+        .details p {
+            margin: 5px 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #777;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -13,8 +40,8 @@
         <p><strong>ID da Transação:</strong> <span th:text="${idTransacao}"></span></p>
         <p><strong>Nome do Pagador:</strong> <span th:text="${nomePagador}"></span></p>
         <p><strong>Nome do Beneficiário:</strong> <span th:text="${nomeBeneficiario}"></span></p>
-        <p><strong>Valor da Transferência:</strong> <span th:text="${valorTransferencia}"></span></p>
-        <p><strong>Data e Hora da Transação:</strong> <span th:text="${dataHoraTransacao}"></span></p>
+        <p><strong>Valor da Transferência: R$</strong> <span th:text="${valorTransferencia}"></span></p>
+        <p><strong>Realizada em:</strong> <span th:text="${dataHoraTransacao}"></span></p>
     </div>
     <div class="footer">
         <p>Este é um email automático, por favor, não responda.</p>

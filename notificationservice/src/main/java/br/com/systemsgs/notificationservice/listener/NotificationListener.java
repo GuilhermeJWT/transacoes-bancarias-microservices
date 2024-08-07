@@ -1,6 +1,7 @@
 package br.com.systemsgs.notificationservice.listener;
 
 import br.com.systemsgs.notificationservice.dto.PayloadNotificationTransaction;
+import br.com.systemsgs.notificationservice.exception.erros.ErroNotificationException;
 import br.com.systemsgs.notificationservice.service.EmaiNotificationlServiceImpl;
 import jakarta.mail.MessagingException;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +29,7 @@ public class NotificationListener {
             emailNotificationService.sendTransactionEmail(payloadMessage.getPayload());
         } catch (MessagingException e) {
             log.error("Erro ao tentar receber Payload de notificação do Beneficiário.");
-            throw new RuntimeException(e);
+            throw new ErroNotificationException();
         }
     }
 }
