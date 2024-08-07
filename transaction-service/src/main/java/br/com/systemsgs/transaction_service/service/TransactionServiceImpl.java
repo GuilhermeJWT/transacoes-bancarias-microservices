@@ -1,5 +1,6 @@
 package br.com.systemsgs.transaction_service.service;
 
+import br.com.systemsgs.transaction_service.dto.PayloadNotificationTransaction;
 import br.com.systemsgs.transaction_service.dto.PayloadResponseTransactionAprovada;
 import br.com.systemsgs.transaction_service.dto.PayloadTransacaoRequestRabbitMq;
 import br.com.systemsgs.transaction_service.enums.StatusPedidoTransacao;
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
+import static br.com.systemsgs.transaction_service.config.RabbitMqConfiguration.QUEUE_NOTIFICATION_BENEFICIARIO;
 import static br.com.systemsgs.transaction_service.config.RabbitMqConfiguration.QUEUE_TRANSACTION_APROVADA;
 
 @Service
@@ -36,8 +38,10 @@ public class TransactionServiceImpl {
 
             var transacaoSalva =  salvaTransacaoAprovada(payloadMessage);
             var dadosTransacaoAprovada = converteDadosTransacaoAprovada(transacaoSalva);
+            var notificaBeneficiario = dadosNotificacao(transacaoSalva);
 
             rabbitTemplate.convertAndSend(QUEUE_TRANSACTION_APROVADA, dadosTransacaoAprovada);
+            rabbitTemplate.convertAndSend(QUEUE_NOTIFICATION_BENEFICIARIO, notificaBeneficiario);
 
         }else {
             throw new TransacaoNegadaException();
@@ -61,11 +65,17 @@ public class TransactionServiceImpl {
         return transactionRepository.save(modelTransaction);
     }
 
-    private String formataDataHoraTransacao(){
-        LocalDateTime dataHora = LocalDateTime.now();
-        DateTimeFormatter formataDataHora = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+    private PayloadNotificationTransaction dadosNotificacao(ModelTransaction modelTransaction){
+        PayloadNotificationTransaction notificationTransaction = new PayloadNotificationTransaction();
 
-        return formataDataHora.format(dataHora);
+        notificationTransaction.setIdTransacao(modelTransaction.getIdTransacao());
+        notificationTransaction.setNomePagador(modelTransaction.getNomePagador());
+        notificationTransaction.setNomeBeneficiario(modelTransaction.getNomeBeneficiario());
+        notificationTransaction.setEmailBeneficiario(modelTransaction.getEmailBeneficiario());
+        notificationTransaction.setValorTransferencia(modelTransaction.getValorTransferencia());
+        notificationTransaction.setDataHoraTransacao(modelTransaction.getDataHoraTransacao());
+
+        return notificationTransaction;
     }
 
     private PayloadResponseTransactionAprovada converteDadosTransacaoAprovada(ModelTransaction modelTransaction){
@@ -78,4 +88,12 @@ public class TransactionServiceImpl {
 
         return payloadTransactionAprovada;
     }
+
+    private String formataDataHoraTransacao(){
+        LocalDateTime dataHora = LocalDateTime.now();
+        DateTimeFormatter formataDataHora = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+        return formataDataHora.format(dataHora);
+    }
+
 }
