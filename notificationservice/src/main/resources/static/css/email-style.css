@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.details {
+    margin-bottom: 20px;
+}
+
+.details p {
+    margin: 5px 0;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.8em;
+    color: #777;
+}
