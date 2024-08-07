@@ -8,6 +8,7 @@ import br.com.systemsgs.transaction_service.enums.TipoCarteira;
 import br.com.systemsgs.transaction_service.exception.erros.TransacaoNegadaException;
 import br.com.systemsgs.transaction_service.model.ModelTransaction;
 import br.com.systemsgs.transaction_service.repository.TransactionRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import java.util.UUID;
 import static br.com.systemsgs.transaction_service.config.RabbitMqConfiguration.QUEUE_NOTIFICATION_BENEFICIARIO;
 import static br.com.systemsgs.transaction_service.config.RabbitMqConfiguration.QUEUE_TRANSACTION_APROVADA;
 
+@Slf4j
 @Service
 public class TransactionServiceImpl {
 
@@ -44,6 +46,7 @@ public class TransactionServiceImpl {
             rabbitTemplate.convertAndSend(QUEUE_NOTIFICATION_BENEFICIARIO, notificaBeneficiario);
 
         }else {
+            log.warn("Tentativa para realizar uma Transação foi negada....");
             throw new TransacaoNegadaException();
         }
     }
