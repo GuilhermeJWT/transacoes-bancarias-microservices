@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.systemsgs</groupId>
-	<artifactId>transaction-service</artifactId>
+	<artifactId>transactionservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>transaction-service</name>
 	<description>Aplicação de Transação e Autorização</description>

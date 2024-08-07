@@ -1,8 +1,8 @@
-package br.com.systemsgs.transaction_service.controller;
+package br.com.systemsgs.transactionservice.controller;
 
-import br.com.systemsgs.transaction_service.model.ModelTransaction;
-import br.com.systemsgs.transaction_service.repository.TransactionRepository;
-import br.com.systemsgs.transaction_service.service.TransactionServiceImpl;
+import br.com.systemsgs.transactionservice.model.ModelTransaction;
+import br.com.systemsgs.transactionservice.repository.TransactionRepository;
+import br.com.systemsgs.transactionservice.service.TransactionServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

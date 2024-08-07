@@ -1,4 +1,4 @@
-package br.com.systemsgs.transaction_service.exception;
+package br.com.systemsgs.transactionservice.exception;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,13 +1,13 @@
-package br.com.systemsgs.transaction_service.service;
+package br.com.systemsgs.transactionservice.service;
 
-import br.com.systemsgs.transaction_service.dto.PayloadNotificationTransaction;
-import br.com.systemsgs.transaction_service.dto.PayloadResponseTransactionAprovada;
-import br.com.systemsgs.transaction_service.dto.PayloadTransacaoRequestRabbitMq;
-import br.com.systemsgs.transaction_service.enums.StatusPedidoTransacao;
-import br.com.systemsgs.transaction_service.enums.TipoCarteira;
-import br.com.systemsgs.transaction_service.exception.erros.TransacaoNegadaException;
-import br.com.systemsgs.transaction_service.model.ModelTransaction;
-import br.com.systemsgs.transaction_service.repository.TransactionRepository;
+import br.com.systemsgs.transactionservice.dto.PayloadNotificationTransaction;
+import br.com.systemsgs.transactionservice.dto.PayloadResponseTransactionAprovada;
+import br.com.systemsgs.transactionservice.dto.PayloadTransacaoRequestRabbitMq;
+import br.com.systemsgs.transactionservice.enums.StatusPedidoTransacao;
+import br.com.systemsgs.transactionservice.enums.TipoCarteira;
+import br.com.systemsgs.transactionservice.exception.erros.TransacaoNegadaException;
+import br.com.systemsgs.transactionservice.model.ModelTransaction;
+import br.com.systemsgs.transactionservice.repository.TransactionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +18,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
-import static br.com.systemsgs.transaction_service.config.RabbitMqConfiguration.QUEUE_NOTIFICATION_BENEFICIARIO;
-import static br.com.systemsgs.transaction_service.config.RabbitMqConfiguration.QUEUE_TRANSACTION_APROVADA;
+import static br.com.systemsgs.transactionservice.config.RabbitMqConfiguration.QUEUE_NOTIFICATION_BENEFICIARIO;
+import static br.com.systemsgs.transactionservice.config.RabbitMqConfiguration.QUEUE_TRANSACTION_APROVADA;
 
 @Slf4j
 @Service

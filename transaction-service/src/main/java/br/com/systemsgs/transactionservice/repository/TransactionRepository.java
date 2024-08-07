@@ -1,6 +1,6 @@
-package br.com.systemsgs.transaction_service.repository;
+package br.com.systemsgs.transactionservice.repository;
 
-import br.com.systemsgs.transaction_service.model.ModelTransaction;
+import br.com.systemsgs.transactionservice.model.ModelTransaction;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

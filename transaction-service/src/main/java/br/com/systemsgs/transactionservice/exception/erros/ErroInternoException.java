@@ -1,4 +1,4 @@
-package br.com.systemsgs.transaction_service.exception.erros;
+package br.com.systemsgs.transactionservice.exception.erros;
 
 public class ErroInternoException extends RuntimeException{
 

@@ -1,4 +1,4 @@
-package br.com.systemsgs.transaction_service.dto;
+package br.com.systemsgs.transactionservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

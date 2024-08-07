@@ -1,14 +1,14 @@
-package br.com.systemsgs.transaction_service.listener;
+package br.com.systemsgs.transactionservice.listener;
 
-import br.com.systemsgs.transaction_service.dto.PayloadTransacaoRequestRabbitMq;
-import br.com.systemsgs.transaction_service.exception.erros.ErroConverterMessageException;
-import br.com.systemsgs.transaction_service.service.TransactionServiceImpl;
+import br.com.systemsgs.transactionservice.dto.PayloadTransacaoRequestRabbitMq;
+import br.com.systemsgs.transactionservice.exception.erros.ErroConverterMessageException;
+import br.com.systemsgs.transactionservice.service.TransactionServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 import org.springframework.messaging.Message;
 
-import static br.com.systemsgs.transaction_service.config.RabbitMqConfiguration.QUEUE_TRANSACTION;
+import static br.com.systemsgs.transactionservice.config.RabbitMqConfiguration.QUEUE_TRANSACTION;
 
 @Slf4j
 @Component

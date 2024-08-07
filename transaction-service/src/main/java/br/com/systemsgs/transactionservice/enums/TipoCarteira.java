@@ -1,4 +1,4 @@
-package br.com.systemsgs.transaction_service.enums;
+package br.com.systemsgs.transactionservice.enums;
 
 public enum TipoCarteira {
 

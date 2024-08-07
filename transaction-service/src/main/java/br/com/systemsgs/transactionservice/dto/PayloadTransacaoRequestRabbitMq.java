@@ -1,4 +1,4 @@
-package br.com.systemsgs.transaction_service.dto;
+package br.com.systemsgs.transactionservice.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;

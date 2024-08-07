@@ -1,4 +1,4 @@
-package br.com.systemsgs.transaction_service;
+package br.com.systemsgs.transactionservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

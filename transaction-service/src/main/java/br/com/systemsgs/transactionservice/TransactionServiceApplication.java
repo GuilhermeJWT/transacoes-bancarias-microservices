@@ -1,4 +1,4 @@
-package br.com.systemsgs.transaction_service;
+package br.com.systemsgs.transactionservice;
 
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.SpringApplication;

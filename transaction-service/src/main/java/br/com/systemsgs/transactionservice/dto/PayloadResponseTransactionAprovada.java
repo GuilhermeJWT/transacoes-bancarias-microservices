@@ -1,6 +1,6 @@
-package br.com.systemsgs.transaction_service.dto;
+package br.com.systemsgs.transactionservice.dto;
 
-import br.com.systemsgs.transaction_service.enums.StatusPedidoTransacao;
+import br.com.systemsgs.transactionservice.enums.StatusPedidoTransacao;
 import lombok.*;
 
 import java.math.BigDecimal;

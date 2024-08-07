@@ -1,4 +1,4 @@
-package br.com.systemsgs.transaction_service.config;
+package br.com.systemsgs.transactionservice.config;
 
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;

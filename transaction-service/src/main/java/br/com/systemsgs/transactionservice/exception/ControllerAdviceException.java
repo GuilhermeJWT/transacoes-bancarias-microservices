@@ -1,9 +1,9 @@
-package br.com.systemsgs.transaction_service.exception;
+package br.com.systemsgs.transactionservice.exception;
 
-import br.com.systemsgs.transaction_service.exception.erros.ErroConverterMessageException;
-import br.com.systemsgs.transaction_service.exception.erros.ErroInternoException;
-import br.com.systemsgs.transaction_service.exception.erros.ErroProcessarDadosException;
-import br.com.systemsgs.transaction_service.exception.erros.TransacaoNegadaException;
+import br.com.systemsgs.transactionservice.exception.erros.ErroConverterMessageException;
+import br.com.systemsgs.transactionservice.exception.erros.ErroInternoException;
+import br.com.systemsgs.transactionservice.exception.erros.ErroProcessarDadosException;
+import br.com.systemsgs.transactionservice.exception.erros.TransacaoNegadaException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.amqp.support.converter.MessageConversionException;
 import org.springframework.http.HttpStatus;
