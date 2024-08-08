@@ -37,9 +37,6 @@ public class ModelUsuarios implements Serializable {
     @Enumerated(EnumType.STRING)
     private TipoCarteira tipoCarteira;
 
-    @Column(name = "quantidade_transacoes_realizadas")
-    private Integer quantidadeTransacoesRealizadas = 0;
-
     @Column(name = "data_criacao_usuario")
     @CreationTimestamp
     private LocalDateTime dataCriacao;
@@ -54,9 +51,5 @@ public class ModelUsuarios implements Serializable {
 
     public void creditar(BigDecimal valor) {
         this.valorConta = this.valorConta.add(valor);
-    }
-
-    public void acrescentaTransacoesRealizadas(){
-        this.quantidadeTransacoesRealizadas = this.quantidadeTransacoesRealizadas + 1;
     }
 }
