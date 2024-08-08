@@ -3,6 +3,7 @@ package br.com.systemsgs.userservice.controller;
 import br.com.systemsgs.userservice.dto.request.PedidoTransacaoDTO;
 import br.com.systemsgs.userservice.service.PedidoTransacaoService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ public class PedidoTransacaoController {
 
     private final PedidoTransacaoService pedidoTransacaoService;
 
+    @Autowired
     public PedidoTransacaoController(PedidoTransacaoService pedidoTransacaoService) {
         this.pedidoTransacaoService = pedidoTransacaoService;
     }

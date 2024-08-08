@@ -6,6 +6,7 @@ import br.com.systemsgs.userservice.model.ModelUsuarios;
 import br.com.systemsgs.userservice.repository.UsuariosRepository;
 import br.com.systemsgs.userservice.service.UsuarioService;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     private final UsuariosRepository usuariosRepository;
     private final ModelMapper mapper;
 
+    @Autowired
     public UsuarioServiceImpl(UsuariosRepository usuariosRepository, ModelMapper mapper) {
         this.usuariosRepository = usuariosRepository;
         this.mapper = mapper;

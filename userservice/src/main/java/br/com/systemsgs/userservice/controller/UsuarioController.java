@@ -5,6 +5,7 @@ import br.com.systemsgs.userservice.dto.response.UsuarioResponse;
 import br.com.systemsgs.userservice.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -19,6 +20,7 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
     private final ModelMapper mapper;
 
+    @Autowired
     public UsuarioController(UsuarioService usuarioService, ModelMapper mapper) {
         this.usuarioService = usuarioService;
         this.mapper = mapper;
