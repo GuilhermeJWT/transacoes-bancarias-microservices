@@ -1,3 +1,5 @@
+package br.com.systemsgs.userservice;
+
 import br.com.systemsgs.userservice.dto.payloads.PayloadResponseTransactionAprovada;
 import br.com.systemsgs.userservice.dto.payloads.PayloadTransacaoRequestRabbitMq;
 import br.com.systemsgs.userservice.dto.request.PedidoTransacaoDTO;
@@ -15,6 +17,8 @@ import java.util.List;
 @ActiveProfiles(value = "test")
 @Getter
 public class DadosEstaticosEntidades {
+
+    protected static final String URL_SALVAR_USUARIOS = "api/v1/usuarios/salvar";
 
     public List<String> mensagemErro(){
         List<String> msgErro = new ArrayList<>();
@@ -43,9 +47,9 @@ public class DadosEstaticosEntidades {
         modelUsuarios.setNome("Guilherme Santos");
         modelUsuarios.setEmail("guilhermeteste@gmail.com");
         modelUsuarios.setCpf("819.945.180-73"); //gerado no site: GERADOR DE CPF
-        modelUsuarios.setValorConta(BigDecimal.valueOf(1000));
+        modelUsuarios.setValorConta(new BigDecimal(1000));
         modelUsuarios.setTipoCarteira(TipoCarteira.USUARIO_COMUM);
-        modelUsuarios.setDataAlteracao(LocalDateTime.of(2024, Month.AUGUST, 8, 12, 57, 48, 123456789));
+        modelUsuarios.setDataCriacao(LocalDateTime.of(2024, Month.AUGUST, 8, 12, 57, 48, 123456789));
         modelUsuarios.setDataAlteracao(LocalDateTime.of(2024, Month.AUGUST, 10, 12, 50, 48, 123456789));
 
         return modelUsuarios;
