@@ -3,42 +3,35 @@ package br.com.systemsgs.userservice.controller;
 import br.com.systemsgs.userservice.DadosEstaticosEntidades;
 import br.com.systemsgs.userservice.dto.request.ModelUsuariosDTO;
 import br.com.systemsgs.userservice.dto.response.UsuarioResponse;
-import br.com.systemsgs.userservice.model.ModelUsuarios;
-import br.com.systemsgs.userservice.service.impl.UsuarioServiceImpl;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.config.JsonPathConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
 import static io.restassured.config.JsonConfig.jsonConfig;
-import static org.junit.jupiter.api.Assertions.*;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
+@TestMethodOrder(OrderAnnotation.class)
+@Transactional
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @ActiveProfiles(value = "test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class UsuarioControllerTest extends DadosEstaticosEntidades {
 
-    private ModelUsuarios modelUsuarios;
     private ModelUsuariosDTO modelUsuariosDTO;
     private UsuarioResponse usuarioResponse;
-
-    private final UsuarioServiceImpl usuarioService;
-    private final ModelMapper mapper;
-
-    @Autowired
-    public UsuarioControllerTest(UsuarioServiceImpl usuarioService, ModelMapper mapper) {
-        this.usuarioService = usuarioService;
-        this.mapper = mapper;
-    }
 
     @LocalServerPort
     private int port;
@@ -51,6 +44,7 @@ class UsuarioControllerTest extends DadosEstaticosEntidades {
         startUsuario();
     }
 
+    @Order(1)
     @DisplayName("Teste para salvar um novo Usuário - 201")
     @Test
     void testSalvarUsuarioRetorna201() {
@@ -73,12 +67,57 @@ class UsuarioControllerTest extends DadosEstaticosEntidades {
                 .body("data_ultima_alteracao_do_usuario", notNullValue());
     }
 
+    @Order(2)
+    @DisplayName("Teste para listar Usuarios - 200")
     @Test
-    void pesquisaUsuarioPorId() {
+    void testeListarUsuarios200() {
+        given()
+                .contentType(ContentType.JSON)
+        .when()
+                .get(URL_LISTAR_USUARIOS)
+        .then()
+                .statusCode(200)
+                .body("[0].codigo_usuario", notNullValue())
+                .body("[0].nome_usuario", notNullValue())
+                .body("[0].email", notNullValue())
+                .body("[0].cpf", notNullValue())
+                .body("[0].valor_na_conta", notNullValue())
+                .body("[0].tipo_carteira", notNullValue())
+                .body("[0].data_criacao_do_usuario", notNullValue())
+                .body("[0].data_ultima_alteracao_do_usuario", notNullValue());
     }
 
+    @Order(3)
+    @DisplayName("Teste para Pesquisar um Usuario pelo ID - 200")
     @Test
-    void listarUsuarios() {
+    void testPesquisaUsuarioPorId200() {
+        given()
+                .contentType(ContentType.JSON)
+        .when()
+                .get(URL_PESQUISAR_USUARIO_POR_ID, usuarioResponse.getId())
+        .then()
+                .statusCode(200)
+                .body("codigo_usuario", notNullValue())
+                .body("nome_usuario", notNullValue())
+                .body("email", notNullValue())
+                .body("cpf", notNullValue())
+                .body("valor_na_conta", notNullValue())
+                .body("tipo_carteira", notNullValue())
+                .body("data_criacao_do_usuario", notNullValue())
+                .body("data_ultima_alteracao_do_usuario", notNullValue());
+    }
+
+    @Order(4)
+    @DisplayName("Teste para Pesquisar um Usuario inexistente pelo ID - 404")
+    @Test
+    void testBuscarUsuarioPorIdNaoEncontrado404(){
+        given()
+                .contentType(ContentType.JSON)
+        .when()
+                .get(URL_PESQUISAR_USUARIO_POR_ID, 0)
+        .then()
+                .statusCode(404)
+                .body("erros[0]", equalTo(mensagemErro().get(4)));
     }
 
     private void startUsuario(){

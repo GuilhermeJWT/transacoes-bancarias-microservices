@@ -19,6 +19,8 @@ import java.util.List;
 public class DadosEstaticosEntidades {
 
     protected static final String URL_SALVAR_USUARIOS = "api/v1/usuarios/salvar";
+    protected static final String URL_LISTAR_USUARIOS = "api/v1/usuarios/listar";
+    protected static final String URL_PESQUISAR_USUARIO_POR_ID = "api/v1/usuarios/pesquisar/{id}";
 
     public List<String> mensagemErro(){
         List<String> msgErro = new ArrayList<>();
@@ -43,10 +45,10 @@ public class DadosEstaticosEntidades {
     public ModelUsuarios dadosUsuarios(){
         ModelUsuarios modelUsuarios = new ModelUsuarios();
 
-        modelUsuarios.setId(1L);
+        modelUsuarios.setId(Long.valueOf(1));
         modelUsuarios.setNome("Guilherme Santos");
-        modelUsuarios.setEmail("guilhermeteste@gmail.com");
-        modelUsuarios.setCpf("819.945.180-73"); //gerado no site: GERADOR DE CPF
+        modelUsuarios.setEmail("guilhermeteste123@gmail.com");
+        modelUsuarios.setCpf("266.224.510-79"); //gerado no site: GERADOR DE CPF
         modelUsuarios.setValorConta(new BigDecimal(1000));
         modelUsuarios.setTipoCarteira(TipoCarteira.USUARIO_COMUM);
         modelUsuarios.setDataCriacao(LocalDateTime.of(2024, Month.AUGUST, 8, 12, 57, 48, 123456789));
