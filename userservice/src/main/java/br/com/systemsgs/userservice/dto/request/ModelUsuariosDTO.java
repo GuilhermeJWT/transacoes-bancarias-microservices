@@ -31,7 +31,7 @@ public class ModelUsuariosDTO {
         @NotNull(message = "Informe o Valor.")
         @DecimalMin(value = "0.0", inclusive = false, message = "O preço deve ser maior que 0.")
         @DecimalMax(value = "999999.0", message = "Valor muito alto para a conta.")
-        @JsonProperty("valor_conta")
+        @JsonProperty("valor_na_conta")
         private BigDecimal valorConta;
 
         @NotNull(message = "Informe o tipo de Carteira - USUARIO_COMUM ou LOJISTA")

@@ -3,6 +3,7 @@ package br.com.systemsgs.userservice.controller;
 import br.com.systemsgs.userservice.dto.request.ModelUsuariosDTO;
 import br.com.systemsgs.userservice.dto.response.UsuarioResponse;
 import br.com.systemsgs.userservice.service.UsuarioService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
+import static br.com.systemsgs.userservice.config.SwaggerConfiguration.TAG_API_USUARIOS;
+
+@Tag(name = TAG_API_USUARIOS)
 @RestController
 @RequestMapping(value = "api/v1/usuarios")
 public class UsuarioController {

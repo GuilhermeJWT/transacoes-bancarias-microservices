@@ -65,7 +65,7 @@ public class PedidoTransacaoServiceImpl implements PedidoTransacaoService {
         }
     }
 
-    private PayloadTransacaoRequestRabbitMq dadosPedidoTransacao(ModelUsuarios pagador, ModelUsuarios beneficiario, PedidoTransacaoDTO pedidoTransacaoDTO){
+    public PayloadTransacaoRequestRabbitMq dadosPedidoTransacao(ModelUsuarios pagador, ModelUsuarios beneficiario, PedidoTransacaoDTO pedidoTransacaoDTO){
         PayloadTransacaoRequestRabbitMq payloadRabbitMq = new PayloadTransacaoRequestRabbitMq();
 
         payloadRabbitMq.setIdPagador(pagador.getId());
@@ -79,7 +79,7 @@ public class PedidoTransacaoServiceImpl implements PedidoTransacaoService {
         return payloadRabbitMq;
     }
 
-    private void validaSaldoAtualPagador(PedidoTransacaoDTO pedidoTransacaoDTO, ModelUsuarios pagador){
+    public void validaSaldoAtualPagador(PedidoTransacaoDTO pedidoTransacaoDTO, ModelUsuarios pagador){
         if(pedidoTransacaoDTO.getValorTransferencia().compareTo(pagador.getValorConta()) >= 1){//Valor maior que o Saldo Atual da Conta
             throw new ValorTransacaoMaiorContaAtualException();
         }

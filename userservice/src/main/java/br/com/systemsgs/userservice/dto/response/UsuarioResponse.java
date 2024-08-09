@@ -31,12 +31,6 @@ public class UsuarioResponse{
    @JsonProperty("tipo_carteira")
    private String tipoCarteira;
 
-   @JsonProperty("quantidade_transacoes_realizadas")
-   private Integer quantidadeTransacoesRealizadas;
-
-   @JsonProperty("total_transacoes_realizadas")
-   private BigDecimal totalTransacoesRealizadas;
-
    @JsonProperty("data_criacao_do_usuario")
    private LocalDateTime dataCriacao;
 
