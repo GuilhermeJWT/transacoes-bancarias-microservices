@@ -14,7 +14,7 @@ import static br.com.systemsgs.userservice.config.SwaggerConfiguration.TAG_API_T
 
 @Tag(name = TAG_API_TRANSACOES)
 @RestController
-@RequestMapping("/api/v1/transacao")
+@RequestMapping("api/v1/transacao")
 public class PedidoTransacaoController {
 
     private final PedidoTransacaoService pedidoTransacaoService;

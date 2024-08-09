@@ -21,6 +21,7 @@ public class DadosEstaticosEntidades {
     protected static final String URL_SALVAR_USUARIOS = "api/v1/usuarios/salvar";
     protected static final String URL_LISTAR_USUARIOS = "api/v1/usuarios/listar";
     protected static final String URL_PESQUISAR_USUARIO_POR_ID = "api/v1/usuarios/pesquisar/{id}";
+    protected static final String URL_PEDIDO_TRANSACAO = "api/v1/transacao/solicitar";
 
     public List<String> mensagemErro(){
         List<String> msgErro = new ArrayList<>();
@@ -85,9 +86,9 @@ public class DadosEstaticosEntidades {
     public PedidoTransacaoDTO dadosPedidoTransacao(){
         PedidoTransacaoDTO pedidoTransacao = new PedidoTransacaoDTO();
 
-        pedidoTransacao.setIdPagador(1L);
-        pedidoTransacao.setIdBeneficiario(2L);
-        pedidoTransacao.setValorTransferencia(BigDecimal.valueOf(350));
+        pedidoTransacao.setIdPagador(Long.valueOf(1));
+        pedidoTransacao.setIdBeneficiario(Long.valueOf(5));
+        pedidoTransacao.setValorTransferencia(BigDecimal.valueOf(10));
 
         return pedidoTransacao;
     }
