@@ -88,7 +88,7 @@ public class DadosEstaticosEntidades {
 
         pedidoTransacao.setIdPagador(Long.valueOf(1));
         pedidoTransacao.setIdBeneficiario(Long.valueOf(5));
-        pedidoTransacao.setValorTransferencia(BigDecimal.valueOf(10));
+        pedidoTransacao.setValorTransferencia(BigDecimal.valueOf(230));
 
         return pedidoTransacao;
     }
