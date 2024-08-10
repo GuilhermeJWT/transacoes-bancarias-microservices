@@ -51,7 +51,7 @@ public class TransactionServiceImpl {
         }
     }
 
-    private ModelTransaction salvaTransacaoAprovada(PayloadTransacaoRequestRabbitMq payloadMessage){
+    public ModelTransaction salvaTransacaoAprovada(PayloadTransacaoRequestRabbitMq payloadMessage){
         ModelTransaction modelTransaction = new ModelTransaction();
 
         modelTransaction.setIdTransacao(UUID.randomUUID());
@@ -68,7 +68,7 @@ public class TransactionServiceImpl {
         return transactionRepository.save(modelTransaction);
     }
 
-    private PayloadNotificationTransaction dadosNotificacao(ModelTransaction modelTransaction){
+    public PayloadNotificationTransaction dadosNotificacao(ModelTransaction modelTransaction){
         PayloadNotificationTransaction notificationTransaction = new PayloadNotificationTransaction();
 
         notificationTransaction.setIdTransacao(modelTransaction.getIdTransacao());
@@ -81,7 +81,7 @@ public class TransactionServiceImpl {
         return notificationTransaction;
     }
 
-    private PayloadResponseTransactionAprovada converteDadosTransacaoAprovada(ModelTransaction modelTransaction){
+    public PayloadResponseTransactionAprovada converteDadosTransacaoAprovada(ModelTransaction modelTransaction){
         PayloadResponseTransactionAprovada payloadTransactionAprovada = new PayloadResponseTransactionAprovada();
 
         payloadTransactionAprovada.setIdPagador(modelTransaction.getIdPagador());
@@ -92,11 +92,10 @@ public class TransactionServiceImpl {
         return payloadTransactionAprovada;
     }
 
-    private String formataDataHoraTransacao(){
+    public String formataDataHoraTransacao(){
         LocalDateTime dataHora = LocalDateTime.now();
         DateTimeFormatter formataDataHora = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
         return formataDataHora.format(dataHora);
     }
-
 }
