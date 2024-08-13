@@ -20,4 +20,4 @@
   <li>Dados da notificação por E-mail: <strong>ID da Transação, Nome do Pagador, Nome do Beneficiário, Valor da Transferência, Data e Hora da Transação.</strong></li>
 </ol>
 <h2>Resultado final - Envio de E-mail com dados de uma Transação Aprovada:</h2>
-<img src="https://github.com/user-attachments/assets/75c33d34-9781-4713-8ba7-06f43368d695">
+<img src="https://github.com/user-attachments/assets/33964eb7-8975-46bc-990f-f8863401097d">
