@@ -1,5 +1,5 @@
 <h1>Transações Bancarias em Microserviços</h1>
-<p>Por motivos didáticos, criei uma pequena aplicação que simula uma transação bancária, com 3 Microsserviços que se comunicam com RabbitMQ. A ideia deste projeto é realizar uma transferência de dinheiro e notificar o Beneficiário sobre está transação.</p>
+<p>Por motivos didáticos, criei uma pequena aplicação que simula uma transação bancária, com 3 Microsserviços que se comunicam com RabbitMQ. A ideia deste projeto é realizar uma transferência de dinheiro e notificar o Beneficiário sobre está transação, caso seja aprovada.</p>
 <h2>Tecnologias envolvidas:</h2>
 <ol>
   <li>Java 17 - Spring Boot.</li>
